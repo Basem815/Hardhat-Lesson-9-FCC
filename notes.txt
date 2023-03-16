@@ -1,0 +1,57 @@
+    // Lottery
+
+Enter the lottery (pay some amount)
+Pick a random winner (verifiably random)
+    - Chainlink oracle 
+Winner to be selected every X mins/days (fully automated)
+    - Automated execution : Chainlink keepers 
+
+
+Events
+The ethereum virtual machine (EVM) is what makes all of the blockchains running on ethereum tick 
+It has a logging functionality  
+    Events allow us to "print" stuff to these logs (which is cheaper than storing these stuff in a storage object )
+    These events and logs exist in a special datastructure that isn't accessible to the smart contracts 
+    Each event is tied to the smart contract/address that emitted the event 
+Listening for events can be extremely helpful 
+    - If we want to perform a certain task each time someone calls a 'transfer function', then we can listen for such 
+    an even 
+Event e.g:
+event storedNumber{
+    uint256 indexed oldNumber;
+    uint256 indexed newNumber;
+    uint256 addedNumber;
+    address sender 
+}
+    - The indexed keyword is an important keyword (also known as topics)
+    - When we emit an event, there are two kinds of parameters we have (indexed or non-indexed)
+    - An event can have up to 3 indexed parameters 
+    - Indexed paramters are easier to search for and much easier to query 
+Emiting an event 
+    emit storedNumber{
+        favNumber,
+        _favNumber,
+        _favNumber + favNumber,
+        msg.sender
+    }
+Chainlink (Go over keepers documentation and VRF    )
+    VRF v2
+        Create a subscription ID and then add that id when deploying the VRFv2 contract 
+        Once we have paid for that deployment, we can copy the address of the contract created & 
+        use it as the consumer address of vrf.chain.link
+    By doig this, we have authorized our consumer contract to make requests for randomness
+
+To add chainlink dependencies (for import statement in our solidity file to work)
+yarn add --dev @chainlink/contracts
+
+Shorcut commands (such as hh instead of hardhat each time)
+yarn global add hardhat-shorthand
+    - Now we can use 'hh compile' instead of 'yarn hardhat compile'
+
+
+Folder names are very important for solidity
+    - It's 'contracts' NOT 'Contracts'
+            - Tthis is whhy I  get "nothig to compile' error
+
+
+
