@@ -1,6 +1,7 @@
 const { getNamedAccounts, deployments, ethers } = require("hardhat");
 const { developmentChains, networkConfig } = require("../../helper-hardhat.config");
 const { assert, expect } = require("chai");
+
 !developmentChains.includes(network.name)
 	? describe.skip
 	: describe("Lottery", async function () {
@@ -29,7 +30,7 @@ const { assert, expect } = require("chai");
 			});
 			describe("Enter Lottery", async function () {
 				it("Reverts when you don't pay enough", async () => {
-					await expect(lottery.enterLottery()).to.be.revertedWithCustomError(
+					await expect(lottery.enterLottery()).to.be.revertedWith(
 						"Lottery__NotEnoughEthEntered"
 					);
 				});
