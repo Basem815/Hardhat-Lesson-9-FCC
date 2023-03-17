@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.7;
 
-import "../node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-import "../node_modules/@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "../node_modules/@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
 error Lottery__NotEnoughEthEntered();  
 error Lottery__TransferFailed();
@@ -29,7 +29,7 @@ contract Lottery is VRFConsumerBaseV2, KeeperCompatibleInterface {
     uint32 private immutable i_callbackGasLimit;
     uint32 private constant NUM_WORDS = 1;
     /* Events */
-    event LotterEnter(address indexed player);
+    event LotteryEnter(address indexed player);
     event RequestLotteryWinner(uint256 indexed requestId);
     event WinnerPicked(address indexed winner);
     /* Lottery Variables */
@@ -70,7 +70,7 @@ contract Lottery is VRFConsumerBaseV2, KeeperCompatibleInterface {
         s_players.push(payable(msg.sender));
         // We should emit an event whenever we update a dynamic array or mapping
         // Best practice: Name events with the function name reversed
-        emit LotterEnter(msg.sender);
+        emit LotteryEnter(msg.sender);
     }
 
    
